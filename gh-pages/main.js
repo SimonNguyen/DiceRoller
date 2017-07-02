@@ -71,10 +71,12 @@ function dice_initialize(container) {
         var passes = 0;
 
         if (notation.constant) res += ' +' + notation.constant;
-        console.log(save.value);
+
         for (var i = 0, len = result.length; i < len; i++) {
-            if (result[i] > save.value) passes++;
+            if (result[i] >= save.value) passes++;
         }
+
+        set.value = passes + "d6";
 
         // if (result.length > 1) res += ' = ' + 
         //         (result.reduce(function(s, a) { return s + a; }) + notation.constant);

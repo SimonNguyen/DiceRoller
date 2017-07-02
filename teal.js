@@ -137,7 +137,7 @@ else {
 
 teal.rpc = function(params, callback) {
     var ajax = new XMLHttpRequest(), ret;
-    ajax.open("post", 'f', true);
+    ajax.open("post", 'https://api.random.org/json-rpc/1/invoke', true);
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 4)
             callback.call(ajax, JSON.parse(ajax.responseText));
