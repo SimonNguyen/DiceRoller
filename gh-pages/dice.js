@@ -270,7 +270,7 @@
         shading: THREE.FlatShading,
     };
     this.label_color = '#aaaaaa';
-    this.dice_color = '#202020';
+    this.dice_color = '#0026FF';
     this.ambient_light_color = 0xf0f5fb;
     this.spot_light_color = 0xefdfd5;
     this.selector_back_colors = { color: 0x404040, shininess: 0, emissive: 0x858787 };
@@ -380,7 +380,7 @@
             ? new THREE.WebGLRenderer({ antialias: true })
             : new THREE.CanvasRenderer({ antialias: true });
         container.appendChild(this.renderer.domElement);
-        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.enabled = false;
         this.renderer.shadowMap.type = THREE.PCFShadowMap;
         this.renderer.setClearColor(0xffffff, 1);
 
@@ -458,7 +458,7 @@
         this.light.position.set(-mw / 2, mw / 2, mw * 2);
         this.light.target.position.set(0, 0, 0);
         this.light.distance = mw * 5;
-        this.light.castShadow = true;
+        this.light.castShadow = false;
         this.light.shadowCameraNear = mw / 10;
         this.light.shadowCameraFar = mw * 5;
         this.light.shadowCameraFov = 50;
@@ -471,7 +471,7 @@
         if (this.desk) this.scene.remove(this.desk);
         this.desk = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 2, this.h * 2, 1, 1), 
                 new THREE.MeshPhongMaterial({ color: that.desk_color }));
-        this.desk.receiveShadow = true;
+        this.desk.receiveShadow = false;
         this.scene.add(this.desk);
 
         this.renderer.render(this.scene, this.camera);
@@ -515,7 +515,7 @@
 
     this.dice_box.prototype.create_dice = function(type, pos, velocity, angle, axis) {
         var dice = that['create_' + type]();
-        dice.castShadow = true;
+        dice.castShadow = false;
         dice.dice_type = type;
         dice.body = new CANNON.RigidBody(that.dice_mass[type],
                 dice.geometry.cannon_shape, this.dice_body_material);
@@ -717,7 +717,7 @@
         var step = this.w / 4.5;
         this.pane = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 6, this.h * 6, 1, 1), 
                 new THREE.MeshPhongMaterial(that.selector_back_colors));
-        this.pane.receiveShadow = true;
+        this.pane.receiveShadow = false;
         this.pane.position.set(0, 0, 1);
         this.scene.add(this.pane);
 
@@ -726,7 +726,7 @@
         for (var i = 0, pos = -3; i < that.known_types.length; ++i, ++pos) {
             var dice = $t.dice['create_' + that.known_types[i]]();
             dice.position.set(pos * step, 0, step * 0.5);
-            dice.castShadow = true;
+            dice.castShadow = false;
             dice.userData = that.known_types[i];
             this.dices.push(dice); this.scene.add(dice);
         }
