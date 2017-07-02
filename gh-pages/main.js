@@ -80,7 +80,7 @@ function dice_initialize(container) {
 
         // if (result.length > 1) res += ' = ' + 
         //         (result.reduce(function(s, a) { return s + a; }) + notation.constant);
-        label.innerHTML = res + "</br> Passes: " + passes;
+        label.innerHTML = res + "</br> Passes: " + passes + "</br> Dice Rolled: " + result.length;
         info_div.style.display = 'inline-block';
     }
 
